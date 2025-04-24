@@ -1,0 +1,668 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+:root {
+  --primary-color: #0070BA;
+  --primary-hover: #005b96;
+  --error-color: #d9534f;
+  --success-color: #5cb85c;
+  --light-gray: #f8f9fa;
+  --border-color: #e1e4e8;
+  --text-color: #333;
+  --text-secondary: #6c757d;
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --panel-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --border-radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: #f8f9fa;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+header p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.app-content {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  min-height: 75vh;
+}
+
+@media (max-width: 768px) {
+  .app-content {
+    flex-direction: column;
+  }
+}
+
+.left-panel, .right-panel {
+  flex: 1;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--panel-shadow);
+  overflow: hidden;
+}
+
+/* Voice Input Component */
+.voice-input {
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.voice-input h3 {
+  margin-bottom: 1rem;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.controls {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.mic-button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 500;
+  flex: 1;
+  transition: all 0.2s ease;
+}
+
+.mic-button:hover {
+  background-color: var(--primary-hover);
+}
+
+.mic-button.listening {
+  background-color: var(--error-color);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.clear-button {
+  background-color: #f0f0f0;
+  color: var(--text-secondary);
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-button:hover {
+  background-color: #e0e0e0;
+}
+
+.clear-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.status {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+/* Error handling */
+.error-message {
+  color: var(--error-color);
+  background-color: rgba(217, 83, 79, 0.1);
+  padding: 0.75rem;
+  border-radius: var(--border-radius);
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+
+/* Listening indicator */
+.listening-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--error-color);
+  font-weight: 500;
+}
+
+.pulse-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: var(--error-color);
+  border-radius: 50%;
+  animation: pulse-dot 1.5s infinite;
+}
+
+@keyframes pulse-dot {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+}
+
+.speech-prompt {
+  margin: 1rem 0;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* Transcript Display */
+.transcript-display {
+  padding: 1.25rem;
+}
+
+.transcript-display h3 {
+  margin-bottom: 1rem;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.transcript-content {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  min-height: 100px;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+.transcript-content em {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.parse-button {
+  width: 100%;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.6rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.parse-button:hover {
+  background-color: var(--primary-hover);
+}
+
+.parse-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.transcript-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-direction: column;
+}
+
+.text-input-button {
+  width: 100%;
+  background-color: transparent;
+  color: var(--text-secondary);
+  padding: 0.6rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.text-input-button:hover {
+  background-color: var(--light-gray);
+}
+
+/* Flight details component styling */
+.flight-details {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 1.25rem;
+  font-family: var(--font-family);
+  height: 100%;
+  transition: opacity 0.3s ease;
+}
+
+.flight-details-placeholder {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.booking-placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 2rem 1rem;
+  min-height: 250px;
+}
+
+.booking-placeholder .example {
+  font-style: italic;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  background-color: var(--light-gray);
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius);
+}
+
+.flight-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.75rem;
+}
+
+.flight-details-header h3 {
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.airline-logo {
+  font-weight: 500;
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+.flight-card {
+  position: relative;
+  margin-bottom: 1.5rem;
+  animation: fade-in 0.5s ease-out;
+  background-color: var(--light-gray);
+  border-radius: var(--border-radius);
+  padding: 1.25rem;
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-height: 250px;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.flight-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.flight-badge-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.flight-badge {
+  display: inline-block;
+  background-color: rgba(0, 112, 186, 0.1);
+  color: var(--primary-color);
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  min-width: 60px;
+}
+
+.flight-class {
+  background-color: rgba(0, 112, 186, 0.05);
+  color: var(--primary-color);
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  min-width: 60px;
+}
+
+.flight-route {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.departure, .arrival {
+  text-align: center;
+  flex: 1;
+}
+
+.city-code {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.5px;
+  transition: color 0.2s ease;
+}
+
+.city-name {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}
+
+.flight-path {
+  flex: 2;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.flight-details-line {
+  height: 1px;
+  background-color: #ddd;
+  width: 100%;
+  position: relative;
+}
+
+.airplane-icon {
+  position: absolute;
+  color: var(--primary-color);
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.flight-path:hover .airplane-icon {
+  color: var(--primary-hover);
+}
+
+.flight-info {
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.flight-date {
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.flight-time {
+  font-size: 1.1rem;
+  color: #444;
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
+
+.flight-details-meta {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-top: 0.75rem;
+}
+
+.passengers-info, .duration-info {
+  display: flex;
+  align-items: center;
+}
+
+.info-icon {
+  margin-right: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.return-flight {
+  margin-top: 2rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+  position: relative;
+}
+
+.return-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  color: var(--text-secondary);
+  padding: 0.2rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  border: 1px solid var(--border-color);
+  font-weight: 500;
+}
+
+.booking-options {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.primary-button {
+  width: 100%;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.6rem 0;
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.5px;
+}
+
+.primary-button:hover {
+  background-color: var(--primary-hover);
+}
+
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Add these transitions for smoother hover effects */
+.mic-button, .clear-button, .parse-button, .text-input-button, .primary-button {
+  transition: all 0.2s ease;
+}
+
+/* Make the flight card hover effect subtle and elegant */
+.flight-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Add a subtle pulse animation to the airplane icon */
+.airplane-icon {
+  transition: color 0.3s ease;
+}
+
+.flight-path:hover .airplane-icon {
+  color: var(--primary-hover);
+}
+
+/* Add a subtle hover effect to the city codes */
+.departure:hover .city-code,
+.arrival:hover .city-code {
+  color: var(--primary-color);
+}
+
+/* Make manual input textarea more polished */
+.manual-input textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 0.95rem;
+  resize: vertical;
+  font-family: inherit;
+  margin-bottom: 0.75rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.manual-input textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 112, 186, 0.1);
+}
+
+.manual-input-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.manual-input-buttons button {
+  flex: 1;
+  padding: 0.6rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.manual-input-buttons button:hover {
+  background-color: var(--primary-hover);
+}
+
+.manual-input-buttons button:last-child {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.manual-input-buttons button:last-child:hover {
+  background-color: var(--light-gray);
+}
+
+/* Add transitions for form inputs */
+.form-group input {
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+/* Style for highlighted fields */
+.highlight {
+  background-color: rgba(0, 112, 186, 0.1);
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px rgba(0, 112, 186, 0.1);
+}
+
+/* Ensure min-height for text elements to prevent layout shifts */
+.flight-time, .flight-date, .city-code, .city-name {
+  min-height: 1.5em;
+}
+
+/* Add transition for flight info section */
+.flight-info {
+  transition: all 0.3s ease;
+}
